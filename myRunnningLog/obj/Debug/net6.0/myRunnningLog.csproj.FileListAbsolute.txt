@@ -1,0 +1,15 @@
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\bin\Debug\net6.0\myRunnningLog.exe
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\bin\Debug\net6.0\myRunnningLog.deps.json
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\bin\Debug\net6.0\myRunnningLog.runtimeconfig.json
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\bin\Debug\net6.0\myRunnningLog.dll
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\bin\Debug\net6.0\myRunnningLog.pdb
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.csproj.AssemblyReference.cache
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.AssemblyInfoInputs.cache
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.AssemblyInfo.cs
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.csproj.CoreCompileInputs.cache
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.dll
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\refint\myRunnningLog.dll
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.pdb
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\myRunnningLog.genruntimeconfig.cache
+C:\Users\samue\OneDrive\Documents\myRunningLog1\myRunnningLog\obj\Debug\net6.0\ref\myRunnningLog.dll
