@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace myRunnningLog
 {
-    public class newUser
+    public class run
     {
-        // Refer to Section 3 of OOP
+
     }
 }
