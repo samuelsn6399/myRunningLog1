@@ -1,4 +1,5 @@
-﻿using System;
+﻿using myRunnningLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -11,52 +12,29 @@ namespace MyRunningLog
     {
         static void Main(string[] args)
         {
-                                                                                                                                // Create Variables
+            // Create Variables
             double totalMiles = 0.0;
-            TimeSpan totalTime = new TimeSpan(0, 0, 0);                                                                         // Cool object that allows me to log the user input time as h, m, s
-            double weeklyGoal = 10.0;                                                                                           // Change this to a user input when a user creates their profile
-            int numberOfUsers = 0;
+            TimeSpan totalTime = new TimeSpan(0, 0, 0);
+            List<run> runs = new List<run>();
+            DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek) // Cool object that allows me to log the user input time as h, m, s
+            double weeklyGoal = 10.0; // Change this to a user input when a user creates their profile
 
-            var Users = new List<string> {};
-
-            while (true)                                                                                                        // Master loop - Run through data entry prompt until user says to stop
+            // Master loop - Run through data entry prompt until user says to stop
+            while (true)
             {
-                Console.WriteLine("Select a user (Enter an integer) or press q to quit: ");                                     // Prompt for the user's profile, plus have an option to choose new user and create a profile
-                Users.ForEach((v) => Console.WriteLine($"{v + 1}: {0}", v));
-                Console.WriteLine($"{numberOfUsers+1}: New User");
-                string inputUserNum = Console.ReadLine();
+                Console.WriteLine("Log a Run: ");
+                Console.WriteLine("Enter the number of miles for your run (or type 'q' to quit):");
+                string inputMiles = Console.ReadLine();
 
-                if (inputUserNum.ToLower() == "q")                                                                              // If the user inputs the quit command ('q') then break the master while loop
+                if (inputMiles.ToLower() == "q")
                 {
                     break;
                 }
 
-                int userNum;
-                if(!int.TryParse(inputUserNum, out userNum))
-                {
-                    Console.WriteLine("Invalid input. Enter an integer");
-                    continue;
-                }
-                if(userNum > numberOfUsers+1 || userNum < 1)
-                {
-                    Console.WriteLine("Invalid input. Enter an integer from the selection provided");
-                    continue;
-                }
-
-                if(userNum == numberOfUsers)
-                {
-                    // Go to newUser Class
-                    numberOfUsers++;
-                }
-
-                Console.WriteLine("Log a Run: ");
-                Console.WriteLine("Enter Mileage (ex: 2.56): ");
-                string inputMiles = Console.ReadLine();
-
                 // Check if the user inputs a valid number of miles
                 double miles;
                 // Convert the string inputMiles to a double miles
-                if(!double.TryParse(inputMiles, out miles))
+                if (!double.TryParse(inputMiles, out miles))
                 {
                     // If they do not then tell them the input is invalid and return to the beginning of the while loop
                     Console.WriteLine("Invalid input. Enter a valid number of miles");
@@ -68,12 +46,16 @@ namespace MyRunningLog
                 string inputTime = Console.ReadLine();
                 TimeSpan time;
                 // Convert the string inputTime into a time object called time
-                if(!TimeSpan.TryParse(inputTime, out time))
+                if (!TimeSpan.TryParse(inputTime, out time))
                 {
                     Console.WriteLine("Invalid input. Enter a valid time in the format hh:mm:ss");
                     continue;
                 }
                 Console.WriteLine();
+
+                // Create new Run object and add to list of runs
+                run newRun = new run(miles, time);
+                runs.Add(newRun);
 
                 // Update the total variables
                 totalMiles += miles;
@@ -92,6 +74,30 @@ namespace MyRunningLog
                 Console.WriteLine($"Toal Time: {totalTime} (hh,mm,ss)");
                 Console.WriteLine($"Avg Pace: {totalTime.TotalMinutes / totalMiles} min/mi");
                 Console.WriteLine();
+
+                // Checks if one week has past - Thanks StackOverflow!
+                if (DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek) != startOfWeek)
+                {
+                    startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
+
+                    double weeklyTotalMiles = runs.Where(r => r.Date >= startOfWeek).Sum(r => r.Distance);
+                    Console.WriteLine($"Weekly total miles: {weeklyTotalMiles:F2}");
+
+                    if (weeklyTotalMiles >= weeklyGoal)
+                    {
+                        // Congradulate the user for meeting their goal and then raise the new weekly goal 0.05 times higher
+                        Console.WriteLine("Congrats! You met your weekly goal!");
+                        weeklyGoal *= 1.05;
+                        Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
+                    }
+                    else
+                    {
+                        // Reduce the weekly goal if the user did not reach it
+                        Console.WriteLine("You did not quite reach your weekly goal. Keep trying!");
+                        weeklyGoal *= 0.90;
+                        Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
+                    }
+                }
             }
         }
     }
