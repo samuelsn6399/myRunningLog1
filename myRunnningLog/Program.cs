@@ -16,8 +16,12 @@ namespace MyRunningLog
             double totalMiles = 0.0;
             TimeSpan totalTime = new TimeSpan(0, 0, 0);
             List<run> runs = new List<run>();
-            DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek) // Cool object that allows me to log the user input time as h, m, s
-            double weeklyGoal = 10.0; // Change this to a user input when a user creates their profile
+
+            // Cool object that allows me to log the user input time as h, m, s
+            DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
+
+            // Change this to a user input when a user creates their profile
+            double weeklyGoal = 10.0; 
 
             // Master loop - Run through data entry prompt until user says to stop
             while (true)
@@ -33,6 +37,7 @@ namespace MyRunningLog
 
                 // Check if the user inputs a valid number of miles
                 double miles;
+
                 // Convert the string inputMiles to a double miles
                 if (!double.TryParse(inputMiles, out miles))
                 {
@@ -45,6 +50,7 @@ namespace MyRunningLog
                 Console.WriteLine("Enter Time ('hh:mm:ss'): ");
                 string inputTime = Console.ReadLine();
                 TimeSpan time;
+
                 // Convert the string inputTime into a time object called time
                 if (!TimeSpan.TryParse(inputTime, out time))
                 {
