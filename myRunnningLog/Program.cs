@@ -10,6 +10,47 @@ namespace MyRunningLog
 {
     class Program
     {
+        static void Display(double miles, double totalMiles, TimeSpan time, TimeSpan totalTime)
+        {
+
+            // Display the User's running data for current run / Confirmation of data
+            Console.WriteLine("TODAY'S DATA:");
+            Console.WriteLine($"Mileage: {miles} mi");
+            Console.WriteLine($"Time: {time} (hh,mm,ss)");
+            Console.WriteLine($"Pace: {time.TotalMinutes / miles} min/mi");
+            Console.WriteLine();
+
+            // Display Weekly Mileage and Stats
+            Console.WriteLine("WEEK'S DATA:");
+            Console.WriteLine($"Total Mileage: {totalMiles} mi");
+            Console.WriteLine($"Toal Time: {totalTime} (hh,mm,ss)");
+            Console.WriteLine($"Avg Pace: {totalTime.TotalMinutes / totalMiles} min/mi");
+            Console.WriteLine();
+
+
+        }
+
+        static double NextWeekGoal(double weeklyTotalMiles, double weeklyGoal)
+        {
+            if (weeklyTotalMiles >= weeklyGoal)
+            {
+                // Congradulate the user for meeting their goal and then raise the new weekly goal 0.05 times higher
+                Console.WriteLine("Congrats! You met your weekly goal!");
+                weeklyGoal *= 1.05;
+                Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
+            }
+            else
+            {
+                // Reduce the weekly goal if the user did not reach it
+                Console.WriteLine("You did not quite reach your weekly goal. Keep trying!");
+                weeklyGoal *= 0.90;
+                Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
+            }
+
+            return weeklyGoal;
+
+        }
+
         static void Main(string[] args)
         {
             // Create Variables
@@ -67,21 +108,10 @@ namespace MyRunningLog
                 totalMiles += miles;
                 totalTime += time;
 
-                // Display the User's running data for current run / Confirmation of data
-                Console.WriteLine("TODAY'S DATA:");
-                Console.WriteLine($"Mileage: {miles} mi");
-                Console.WriteLine($"Time: {time} (hh,mm,ss)");
-                Console.WriteLine($"Pace: {time.TotalMinutes / miles} min/mi");
-                Console.WriteLine();
+                // Execute the Display method
+                Display(miles, totalMiles, time, totalTime);
 
-                // Display Weekly Mileage and Stats
-                Console.WriteLine("WEEK'S DATA:");
-                Console.WriteLine($"Total Mileage: {totalMiles} mi");
-                Console.WriteLine($"Toal Time: {totalTime} (hh,mm,ss)");
-                Console.WriteLine($"Avg Pace: {totalTime.TotalMinutes / totalMiles} min/mi");
-                Console.WriteLine();
-
-                // Checks if one week has past - Thanks StackOverflow!
+                // Checks if one week has past
                 if (DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek) != startOfWeek)
                 {
                     startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
@@ -89,20 +119,8 @@ namespace MyRunningLog
                     double weeklyTotalMiles = runs.Where(r => r.Date >= startOfWeek).Sum(r => r.Distance);
                     Console.WriteLine($"Weekly total miles: {weeklyTotalMiles:F2}");
 
-                    if (weeklyTotalMiles >= weeklyGoal)
-                    {
-                        // Congradulate the user for meeting their goal and then raise the new weekly goal 0.05 times higher
-                        Console.WriteLine("Congrats! You met your weekly goal!");
-                        weeklyGoal *= 1.05;
-                        Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
-                    }
-                    else
-                    {
-                        // Reduce the weekly goal if the user did not reach it
-                        Console.WriteLine("You did not quite reach your weekly goal. Keep trying!");
-                        weeklyGoal *= 0.90;
-                        Console.WriteLine($"Your new weekly goal: {weeklyGoal} mi");
-                    }
+                    // Execute the NextWeekGoal method to determine what the user's goal will be for next week and return next weeks goal.
+                    NextWeekGoal(weeklyTotalMiles, weeklyGoal);
                 }
             }
         }
