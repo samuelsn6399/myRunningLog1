@@ -7,3 +7,7 @@ My project is a running log that I based off of Under Armor's MapMyRun app. The 
 - Calculate and Display Data Based on External Factor (Date)
 - Create a List, Populate it With Several Values, Retrieve at Least One Value, and Use It
 ## Special Instructions
+1) Clone the repository
+2) Open the project in .NET
+3) run program.cs
+4) Follow the prompted instructions (sometimes takes a second to load)
